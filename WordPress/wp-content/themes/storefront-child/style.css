@@ -1,0 +1,15 @@
+/*
+Theme Name: Storefront Child
+Theme URI: http://example.com/storefront-child
+Description: Дочірня тема для Storefront test task
+Author: OSonich
+Author URI: http://sierra-group.in.ua
+Template: storefront
+Version: 1.0.0
+Text Domain: storefront-child
+*/
+
+
+body {
+    background: red;
+}

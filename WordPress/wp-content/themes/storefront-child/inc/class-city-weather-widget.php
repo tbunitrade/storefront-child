@@ -1,11 +1,11 @@
 <?php
 class City_Weather_Widget extends WP_Widget {
 
-    public function __construct() {
+    function __construct() {
         parent::__construct(
             'city_weather_widget',
             __('City Weather'),
-            array('description' => __('Отображает город и текущую температуру'))
+            array('description' => __('Displays the city name and current temperature using OpenWeatherMap API'))
         );
     }
 
@@ -15,8 +15,9 @@ class City_Weather_Widget extends WP_Widget {
         $latitude = get_post_meta($city_id, 'city_latitude', true);
         $longitude = get_post_meta($city_id, 'city_longitude', true);
 
-        // Запрос к API для получения температуры
-        $temperature = ''; // Получаем из API
+        // Получение температуры через API OpenWeatherMap
+        $api_key = '953e1e40acff2a9d942ca3dc2425c01f'; // Замени на свой API ключ
+        $temperature = $this->get_city_temperature($latitude, $longitude, $api_key);
 
         echo $args['before_widget'];
         if (!empty($city_name)) {
@@ -24,6 +25,24 @@ class City_Weather_Widget extends WP_Widget {
         }
         echo '<p>' . __('Температура: ') . $temperature . '°C</p>';
         echo $args['after_widget'];
+    }
+
+    private function get_city_temperature($latitude, $longitude, $api_key) {
+        $url = "https://api.openweathermap.org/data/2.5/weather?lat={$latitude}&lon={$longitude}&units=metric&appid={$api_key}";
+
+        $response = wp_remote_get($url);
+
+        if (is_wp_error($response)) {
+            return __('Ошибка получения данных', 'storefront-child');
+        }
+
+        $data = json_decode(wp_remote_retrieve_body($response), true);
+
+        if (isset($data['main']['temp'])) {
+            return $data['main']['temp'];
+        } else {
+            return __('Не удалось получить температуру', 'storefront-child');
+        }
     }
 
     public function form($instance) {

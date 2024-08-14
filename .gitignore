@@ -1,0 +1,10 @@
+.phar
+.rar
+dummy
+node_modules
+.env
+.zip
+uploads
+wp-admin
+wp-cli.phar
+wp-cli.phar.1

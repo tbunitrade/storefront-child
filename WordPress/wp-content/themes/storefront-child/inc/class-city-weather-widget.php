@@ -25,6 +25,9 @@ class City_Weather_Widget extends WP_Widget {
 
         // Формируем URL для запроса к API
         $url = "https://api.openweathermap.org/data/2.5/weather?lat={$latitude}&lon={$longitude}&appid={$api_key}&units=metric";
+        
+        var_dump('urlso',$url);
+
         error_log('API URL: ' . $url); // Логируем URL для отладки
 
         $response = wp_remote_get($url);

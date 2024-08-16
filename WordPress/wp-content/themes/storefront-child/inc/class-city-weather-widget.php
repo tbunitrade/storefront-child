@@ -17,19 +17,36 @@ class City_Weather_Widget extends WP_Widget {
         $longitude = get_post_meta($city_id, 'city_longitude', true);
         
         $api_key = get_option('city_temperature_api_key'); // Используем API-ключ из настроек
+
+        if (!$api_key || !$latitude || !$longitude) {
+            echo '<p>' . __('Не удалось получить данные. Проверьте настройки API и координаты города.', 'storefront-child') . '</p>';
+            return;
+        }
+
+        // Формируем URL для запроса к API
         $url = "https://api.openweathermap.org/data/2.5/weather?lat={$latitude}&lon={$longitude}&appid={$api_key}&units=metric";
-        
+        error_log('API URL: ' . $url); // Логируем URL для отладки
+
         $response = wp_remote_get($url);
+
         if (is_wp_error($response)) {
+            error_log('Ошибка запроса к API: ' . $response->get_error_message()); // Логируем ошибки запроса
+            echo '<p>' . __('Ошибка получения данных от API.', 'storefront-child') . '</p>';
             return;
         }
 
         $data = json_decode(wp_remote_retrieve_body($response), true);
-        $temperature = isset($data['main']['temp']) ? $data['main']['temp'] : __('Не удалось получить температуру', 'storefront-child');
+
+        if (isset($data['main']['temp'])) {
+            $temperature = $data['main']['temp'];
+        } else {
+            error_log('Ошибка получения данных из API. Ответ: ' . print_r($data, true)); // Логируем ответ API
+            $temperature = __('Не удалось получить температуру', 'storefront-child');
+        }
 
         echo $args['before_widget'];
-        echo $args['before_title'] . $city_name . $args['after_title'];
-        echo '<p>' . __('Температура: ') . $temperature . '°C</p>';
+        echo $args['before_title'] . esc_html($city_name) . $args['after_title'];
+        echo '<p>' . __('Температура: ', 'storefront-child') . esc_html($temperature) . '°C</p>';
         echo $args['after_widget'];
     }
 

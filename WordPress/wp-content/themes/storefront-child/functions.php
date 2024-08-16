@@ -1,4 +1,21 @@
 <?php
+
+function my_enqueue_scripts() {
+    // Подключаем jQuery
+    wp_enqueue_script('jquery');
+
+    // Подключаем ваш скрипт
+    wp_enqueue_script(
+        'city-temperature-script',
+        get_stylesheet_directory_uri() . '/js/city-temperature.js',
+        array('jquery'),  // Указываем зависимость от jQuery
+        null,
+        true
+    );
+}
+add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
+
+
 // Регистрация кастомного типа записи "Cities"
 function register_city_post_type() {
     $labels = array(

@@ -9,3 +9,4 @@ wp-admin
 wp-cli.phar
 wp-cli.phar.1
 wp-config.php
+debug.log

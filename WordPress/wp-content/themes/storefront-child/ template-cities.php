@@ -1,14 +1,9 @@
 <?php
+/*
+Template Name: Список городов
+*/
 
-/**
- * Template Name: City`s list
- */
-
- get_header();
-
- // Добавляем кастомный хук перед таблицей
-do_action('before_cities_table');
-?>
+get_header(); ?>
 
 <div class="city-search">
     <input type="text" id="city-search-input" placeholder="Поиск городов...">
@@ -25,43 +20,60 @@ do_action('before_cities_table');
     </thead>
     <tbody>
         <?php
-        global $wpdb;
+        // Создаем WP_Query для получения городов
+        $args = array(
+            'post_type' => 'city',
+            'posts_per_page' => -1,
+            'post_status' => 'publish',
+            'meta_query' => array(
+                'relation' => 'AND',
+                array(
+                    'key' => 'city_latitude',
+                    'compare' => 'EXISTS',
+                ),
+                array(
+                    'key' => 'city_longitude',
+                    'compare' => 'EXISTS',
+                ),
+            ),
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'country',
+                    'field'    => 'term_id',
+                    'terms'    => get_terms(array('taxonomy' => 'country', 'fields' => 'ids')),
+                ),
+            ),
+        );
 
-        // Запрос для получения данных о городах и странах
-        $query = "
-            SELECT p.ID, p.post_title AS city_name, t.name AS country_name, pm_lat.meta_value AS latitude, pm_lon.meta_value AS longitude
-            FROM {$wpdb->posts} p
-            LEFT JOIN {$wpdb->term_relationships} tr ON (p.ID = tr.object_id)
-            LEFT JOIN {$wpdb->term_taxonomy} tt ON (tr.term_taxonomy_id = tt.term_taxonomy_id AND tt.taxonomy = 'country')
-            LEFT JOIN {$wpdb->terms} t ON (tt.term_id = t.term_id)
-            LEFT JOIN {$wpdb->postmeta} pm_lat ON (p.ID = pm_lat.post_id AND pm_lat.meta_key = 'city_latitude')
-            LEFT JOIN {$wpdb->postmeta} pm_lon ON (p.ID = pm_lon.post_id AND pm_lon.meta_key = 'city_longitude')
-            WHERE p.post_type = 'city' AND p.post_status = 'publish'
-        ";
+        $cities_query = new WP_Query($args);
 
-        $cities = $wpdb->get_results($query);
+        if ($cities_query->have_posts()) :
+            while ($cities_query->have_posts()) : $cities_query->the_post();
+                $city_id = get_the_ID();
+                $city_name = get_the_title();
+                $latitude = get_post_meta($city_id, 'city_latitude', true);
+                $longitude = get_post_meta($city_id, 'city_longitude', true);
 
-        // Отображение городов и температур
-        foreach ($cities as $city) {
-            // Здесь сделаем запрос к API для получения температуры
-            $temperature = ''; // Здесь добавляем логику для получения температуры по широте и долготе
+                $country_terms = get_the_terms($city_id, 'country');
+                $country_name = $country_terms ? $country_terms[0]->name : '';
 
-            echo '<tr>';
-            echo '<td>' . esc_html($city->country_name) . '</td>';
-            echo '<td>' . esc_html($city->city_name) . '</td>';
-            echo '<td>' . esc_html($temperature) . '°C</td>';
-            echo '</tr>';
-        }
+                // Выводим данные
+                echo '<tr>';
+                echo '<td>' . esc_html($country_name) . '</td>';
+                echo '<td>' . esc_html($city_name) . '</td>';
+                echo '<td>' . esc_html(get_post_meta($city_id, 'city_temperature', true)) . '°C</td>';
+                echo '</tr>';
+
+            endwhile;
+            wp_reset_postdata();
+        else :
+            echo '<tr><td colspan="3">' . __('Нет городов для отображения.', 'storefront-child') . '</td></tr>';
+        endif;
         ?>
     </tbody>
 </table>
 
-<?php
-// Добавляем кастомный хук после таблицы
-do_action('after_cities_table');
-
-get_footer();
-?>
+<?php get_footer(); ?>
 
 <script type="text/javascript">
 jQuery(document).ready(function($) {

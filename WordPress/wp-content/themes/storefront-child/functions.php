@@ -86,14 +86,34 @@ function render_city_coordinates_meta_box($post) {
 }
 
 function save_city_coordinates($post_id) {
-    if (array_key_exists('city_latitude', $_POST)) {
+    if (array_key_exists('city_latitude', $_POST) && !empty($_POST['city_latitude'])) {
         update_post_meta($post_id, 'city_latitude', sanitize_text_field($_POST['city_latitude']));
     }
-    if (array_key_exists('city_longitude', $_POST)) {
+
+    if (array_key_exists('city_longitude', $_POST) && !empty($_POST['city_longitude'])) {
         update_post_meta($post_id, 'city_longitude', sanitize_text_field($_POST['city_longitude']));
+    }
+
+    // Если широта или долгота не введены вручную, получаем их из API
+    if (empty($_POST['city_latitude']) || empty($_POST['city_longitude'])) {
+        $city_name = get_the_title($post_id);
+        $api_key = get_option('city_temperature_api_key');
+
+        // Запрос к API OpenWeatherMap по названию города
+        $url = "https://api.openweathermap.org/data/2.5/weather?q={$city_name}&appid={$api_key}&units=metric";
+        $response = wp_remote_get($url);
+
+        if (!is_wp_error($response)) {
+            $data = json_decode(wp_remote_retrieve_body($response), true);
+            if (isset($data['coord']['lat']) && isset($data['coord']['lon'])) {
+                update_post_meta($post_id, 'city_latitude', sanitize_text_field($data['coord']['lat']));
+                update_post_meta($post_id, 'city_longitude', sanitize_text_field($data['coord']['lon']));
+            }
+        }
     }
 }
 add_action('save_post_city', 'save_city_coordinates');
+
 
 // Добавление страницы настроек для API-ключа
 function city_temperature_settings_init() {
@@ -113,6 +133,26 @@ function city_temperature_settings_init() {
     );
 
     register_setting('general', 'city_temperature_api_key', 'esc_attr');
+}
+
+function add_temperature_meta_box() {
+    add_meta_box(
+        'city_temperature',
+        __('City Temperature', 'storefront-child'),
+        'render_city_temperature_meta_box',
+        'city',
+        'side',
+        'default'
+    );
+}
+add_action('add_meta_boxes', 'add_temperature_meta_box');
+
+function render_city_temperature_meta_box($post) {
+    $temperature = get_post_meta($post->ID, 'city_temperature', true);
+    ?>
+    <label for="city_temperature"><?php _e('Temperature:', 'storefront-child'); ?></label>
+    <input type="text" id="city_temperature" name="city_temperature" value="<?php echo esc_attr($temperature); ?>" class="widefat" readonly>
+    <?php
 }
 
 function city_temperature_api_key_field() {
@@ -179,3 +219,42 @@ function handle_ajax_city_search() {
 
 add_action('wp_ajax_city_search', 'handle_ajax_city_search');
 add_action('wp_ajax_nopriv_city_search', 'handle_ajax_city_search');
+
+function update_city_temperature() {
+    check_ajax_referer('advanced_search_nonce', 'nonce');
+
+    $city_name = sanitize_text_field($_POST['city']);
+    $api_key = get_option('city_temperature_api_key');
+    $url = "https://api.openweathermap.org/data/2.5/weather?q={$city_name}&appid={$api_key}&units=metric";
+    $response = wp_remote_get($url);
+
+    if (is_wp_error($response)) {
+        wp_send_json_error(array('message' => 'API request failed.'));
+    }
+
+    $data = json_decode(wp_remote_retrieve_body($response), true);
+    if (!isset($data['main']['temp'])) {
+        wp_send_json_error(array('message' => 'Temperature not found.'));
+    }
+
+    $temperature = $data['main']['temp'];
+
+    // Обновляем температуру в мета-поле
+    $cities_query = new WP_Query(array(
+        'post_type' => 'city',
+        'title' => $city_name,
+        'posts_per_page' => 1,
+    ));
+
+    if ($cities_query->have_posts()) {
+        while ($cities_query->have_posts()) {
+            $cities_query->the_post();
+            update_post_meta(get_the_ID(), 'city_temperature', $temperature);
+        }
+    }
+
+    wp_send_json_success(array('temperature' => $temperature));
+    wp_die();
+}
+add_action('wp_ajax_update_city_temperature', 'update_city_temperature');
+add_action('wp_ajax_nopriv_update_city_temperature', 'update_city_temperature');

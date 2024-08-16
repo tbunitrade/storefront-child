@@ -184,3 +184,1417 @@
     [cod] => 200
 )
 
+[16-Aug-2024 11:50:15 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => 33.1159
+            [lat] => 48.6696
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 802
+                    [main] => Clouds
+                    [description] => scattered clouds
+                    [icon] => 03d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 30.5
+            [feels_like] => 28.69
+            [temp_min] => 30.5
+            [temp_max] => 30.5
+            [pressure] => 1016
+            [humidity] => 21
+            [sea_level] => 1016
+            [grnd_level] => 999
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 4
+            [deg] => 356
+            [gust] => 4.21
+        )
+
+    [clouds] => Array
+        (
+            [all] => 31
+        )
+
+    [dt] => 1723808631
+    [sys] => Array
+        (
+            [country] => UA
+            [sunrise] => 1723776150
+            [sunset] => 1723827680
+        )
+
+    [timezone] => 10800
+    [id] => 698625
+    [name] => Oleksandriya
+    [cod] => 200
+)
+
+[16-Aug-2024 11:50:16 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => 30.5167
+            [lat] => 50.4333
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 804
+                    [main] => Clouds
+                    [description] => overcast clouds
+                    [icon] => 04d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 28.73
+            [feels_like] => 28.6
+            [temp_min] => 28.73
+            [temp_max] => 29.25
+            [pressure] => 1017
+            [humidity] => 43
+            [sea_level] => 1017
+            [grnd_level] => 1001
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 0.45
+            [deg] => 339
+            [gust] => 1.79
+        )
+
+    [clouds] => Array
+        (
+            [all] => 100
+        )
+
+    [dt] => 1723808641
+    [sys] => Array
+        (
+            [type] => 2
+            [id] => 2003742
+            [country] => UA
+            [sunrise] => 1723776506
+            [sunset] => 1723828571
+        )
+
+    [timezone] => 10800
+    [id] => 703448
+    [name] => Kyiv
+    [cod] => 200
+)
+
+[16-Aug-2024 11:50:16 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => 30.5167
+            [lat] => 50.4333
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 804
+                    [main] => Clouds
+                    [description] => overcast clouds
+                    [icon] => 04d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 28.73
+            [feels_like] => 28.6
+            [temp_min] => 28.73
+            [temp_max] => 29.25
+            [pressure] => 1017
+            [humidity] => 43
+            [sea_level] => 1017
+            [grnd_level] => 1001
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 0.45
+            [deg] => 339
+            [gust] => 1.79
+        )
+
+    [clouds] => Array
+        (
+            [all] => 100
+        )
+
+    [dt] => 1723808641
+    [sys] => Array
+        (
+            [type] => 2
+            [id] => 2003742
+            [country] => UA
+            [sunrise] => 1723776506
+            [sunset] => 1723828571
+        )
+
+    [timezone] => 10800
+    [id] => 703448
+    [name] => Kyiv
+    [cod] => 200
+)
+
+[16-Aug-2024 11:50:17 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => 33.1159
+            [lat] => 48.6696
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 802
+                    [main] => Clouds
+                    [description] => scattered clouds
+                    [icon] => 03d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 30.5
+            [feels_like] => 28.69
+            [temp_min] => 30.5
+            [temp_max] => 30.5
+            [pressure] => 1016
+            [humidity] => 21
+            [sea_level] => 1016
+            [grnd_level] => 999
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 4
+            [deg] => 356
+            [gust] => 4.21
+        )
+
+    [clouds] => Array
+        (
+            [all] => 31
+        )
+
+    [dt] => 1723808631
+    [sys] => Array
+        (
+            [country] => UA
+            [sunrise] => 1723776150
+            [sunset] => 1723827680
+        )
+
+    [timezone] => 10800
+    [id] => 698625
+    [name] => Oleksandriya
+    [cod] => 200
+)
+
+[16-Aug-2024 11:50:17 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => 30.5167
+            [lat] => 50.4333
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 804
+                    [main] => Clouds
+                    [description] => overcast clouds
+                    [icon] => 04d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 28.73
+            [feels_like] => 28.6
+            [temp_min] => 28.73
+            [temp_max] => 29.25
+            [pressure] => 1017
+            [humidity] => 43
+            [sea_level] => 1017
+            [grnd_level] => 1001
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 0.45
+            [deg] => 339
+            [gust] => 1.79
+        )
+
+    [clouds] => Array
+        (
+            [all] => 100
+        )
+
+    [dt] => 1723808641
+    [sys] => Array
+        (
+            [type] => 2
+            [id] => 2003742
+            [country] => UA
+            [sunrise] => 1723776506
+            [sunset] => 1723828571
+        )
+
+    [timezone] => 10800
+    [id] => 703448
+    [name] => Kyiv
+    [cod] => 200
+)
+
+[16-Aug-2024 11:50:28 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => 33.1159
+            [lat] => 48.6696
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 802
+                    [main] => Clouds
+                    [description] => scattered clouds
+                    [icon] => 03d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 30.5
+            [feels_like] => 28.69
+            [temp_min] => 30.5
+            [temp_max] => 30.5
+            [pressure] => 1016
+            [humidity] => 21
+            [sea_level] => 1016
+            [grnd_level] => 999
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 4
+            [deg] => 356
+            [gust] => 4.21
+        )
+
+    [clouds] => Array
+        (
+            [all] => 31
+        )
+
+    [dt] => 1723808631
+    [sys] => Array
+        (
+            [country] => UA
+            [sunrise] => 1723776150
+            [sunset] => 1723827680
+        )
+
+    [timezone] => 10800
+    [id] => 698625
+    [name] => Oleksandriya
+    [cod] => 200
+)
+
+[16-Aug-2024 11:50:28 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => 30.5167
+            [lat] => 50.4333
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 804
+                    [main] => Clouds
+                    [description] => overcast clouds
+                    [icon] => 04d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 28.73
+            [feels_like] => 28.6
+            [temp_min] => 28.73
+            [temp_max] => 29.25
+            [pressure] => 1017
+            [humidity] => 43
+            [sea_level] => 1017
+            [grnd_level] => 1001
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 0.45
+            [deg] => 339
+            [gust] => 1.79
+        )
+
+    [clouds] => Array
+        (
+            [all] => 100
+        )
+
+    [dt] => 1723808641
+    [sys] => Array
+        (
+            [type] => 2
+            [id] => 2003742
+            [country] => UA
+            [sunrise] => 1723776506
+            [sunset] => 1723828571
+        )
+
+    [timezone] => 10800
+    [id] => 703448
+    [name] => Kyiv
+    [cod] => 200
+)
+
+[16-Aug-2024 11:50:29 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => 30.5167
+            [lat] => 50.4333
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 804
+                    [main] => Clouds
+                    [description] => overcast clouds
+                    [icon] => 04d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 28.73
+            [feels_like] => 28.6
+            [temp_min] => 28.73
+            [temp_max] => 29.25
+            [pressure] => 1017
+            [humidity] => 43
+            [sea_level] => 1017
+            [grnd_level] => 1001
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 0.45
+            [deg] => 339
+            [gust] => 1.79
+        )
+
+    [clouds] => Array
+        (
+            [all] => 100
+        )
+
+    [dt] => 1723808641
+    [sys] => Array
+        (
+            [type] => 2
+            [id] => 2003742
+            [country] => UA
+            [sunrise] => 1723776506
+            [sunset] => 1723828571
+        )
+
+    [timezone] => 10800
+    [id] => 703448
+    [name] => Kyiv
+    [cod] => 200
+)
+
+[16-Aug-2024 11:50:29 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => 30.5167
+            [lat] => 50.4333
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 804
+                    [main] => Clouds
+                    [description] => overcast clouds
+                    [icon] => 04d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 28.73
+            [feels_like] => 28.6
+            [temp_min] => 28.73
+            [temp_max] => 29.25
+            [pressure] => 1017
+            [humidity] => 43
+            [sea_level] => 1017
+            [grnd_level] => 1001
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 0.45
+            [deg] => 339
+            [gust] => 1.79
+        )
+
+    [clouds] => Array
+        (
+            [all] => 100
+        )
+
+    [dt] => 1723808641
+    [sys] => Array
+        (
+            [type] => 2
+            [id] => 2003742
+            [country] => UA
+            [sunrise] => 1723776506
+            [sunset] => 1723828571
+        )
+
+    [timezone] => 10800
+    [id] => 703448
+    [name] => Kyiv
+    [cod] => 200
+)
+
+[16-Aug-2024 11:50:29 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => 30.5167
+            [lat] => 50.4333
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 804
+                    [main] => Clouds
+                    [description] => overcast clouds
+                    [icon] => 04d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 28.73
+            [feels_like] => 28.6
+            [temp_min] => 28.73
+            [temp_max] => 29.25
+            [pressure] => 1017
+            [humidity] => 43
+            [sea_level] => 1017
+            [grnd_level] => 1001
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 0.45
+            [deg] => 339
+            [gust] => 1.79
+        )
+
+    [clouds] => Array
+        (
+            [all] => 100
+        )
+
+    [dt] => 1723808641
+    [sys] => Array
+        (
+            [type] => 2
+            [id] => 2003742
+            [country] => UA
+            [sunrise] => 1723776506
+            [sunset] => 1723828571
+        )
+
+    [timezone] => 10800
+    [id] => 703448
+    [name] => Kyiv
+    [cod] => 200
+)
+
+[16-Aug-2024 11:51:11 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => -0.1257
+            [lat] => 51.5085
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 800
+                    [main] => Clear
+                    [description] => clear sky
+                    [icon] => 01d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 21.9
+            [feels_like] => 21.69
+            [temp_min] => 20.2
+            [temp_max] => 23.21
+            [pressure] => 1015
+            [humidity] => 59
+            [sea_level] => 1015
+            [grnd_level] => 1011
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 0.45
+            [deg] => 268
+            [gust] => 0.89
+        )
+
+    [clouds] => Array
+        (
+            [all] => 0
+        )
+
+    [dt] => 1723808656
+    [sys] => Array
+        (
+            [type] => 2
+            [id] => 268730
+            [country] => GB
+            [sunrise] => 1723783694
+            [sunset] => 1723836090
+        )
+
+    [timezone] => 3600
+    [id] => 2643743
+    [name] => London
+    [cod] => 200
+)
+
+[16-Aug-2024 11:51:12 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => -0.1257
+            [lat] => 51.5085
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 800
+                    [main] => Clear
+                    [description] => clear sky
+                    [icon] => 01d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 21.9
+            [feels_like] => 21.69
+            [temp_min] => 20.2
+            [temp_max] => 23.21
+            [pressure] => 1015
+            [humidity] => 59
+            [sea_level] => 1015
+            [grnd_level] => 1011
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 0.45
+            [deg] => 268
+            [gust] => 0.89
+        )
+
+    [clouds] => Array
+        (
+            [all] => 0
+        )
+
+    [dt] => 1723808656
+    [sys] => Array
+        (
+            [type] => 2
+            [id] => 268730
+            [country] => GB
+            [sunrise] => 1723783694
+            [sunset] => 1723836090
+        )
+
+    [timezone] => 3600
+    [id] => 2643743
+    [name] => London
+    [cod] => 200
+)
+
+[16-Aug-2024 11:51:12 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => 33.1159
+            [lat] => 48.6696
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 802
+                    [main] => Clouds
+                    [description] => scattered clouds
+                    [icon] => 03d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 30.5
+            [feels_like] => 28.69
+            [temp_min] => 30.5
+            [temp_max] => 30.5
+            [pressure] => 1016
+            [humidity] => 21
+            [sea_level] => 1016
+            [grnd_level] => 999
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 4
+            [deg] => 356
+            [gust] => 4.21
+        )
+
+    [clouds] => Array
+        (
+            [all] => 31
+        )
+
+    [dt] => 1723808631
+    [sys] => Array
+        (
+            [country] => UA
+            [sunrise] => 1723776150
+            [sunset] => 1723827680
+        )
+
+    [timezone] => 10800
+    [id] => 698625
+    [name] => Oleksandriya
+    [cod] => 200
+)
+
+[16-Aug-2024 11:51:12 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => -0.1257
+            [lat] => 51.5085
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 800
+                    [main] => Clear
+                    [description] => clear sky
+                    [icon] => 01d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 21.9
+            [feels_like] => 21.69
+            [temp_min] => 20.2
+            [temp_max] => 23.21
+            [pressure] => 1015
+            [humidity] => 59
+            [sea_level] => 1015
+            [grnd_level] => 1011
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 0.45
+            [deg] => 268
+            [gust] => 0.89
+        )
+
+    [clouds] => Array
+        (
+            [all] => 0
+        )
+
+    [dt] => 1723808656
+    [sys] => Array
+        (
+            [type] => 2
+            [id] => 268730
+            [country] => GB
+            [sunrise] => 1723783694
+            [sunset] => 1723836090
+        )
+
+    [timezone] => 3600
+    [id] => 2643743
+    [name] => London
+    [cod] => 200
+)
+
+[16-Aug-2024 11:53:44 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => 33.1159
+            [lat] => 48.6696
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 802
+                    [main] => Clouds
+                    [description] => scattered clouds
+                    [icon] => 03d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 30.5
+            [feels_like] => 28.69
+            [temp_min] => 30.5
+            [temp_max] => 30.5
+            [pressure] => 1016
+            [humidity] => 21
+            [sea_level] => 1016
+            [grnd_level] => 999
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 4
+            [deg] => 356
+            [gust] => 4.21
+        )
+
+    [clouds] => Array
+        (
+            [all] => 31
+        )
+
+    [dt] => 1723808631
+    [sys] => Array
+        (
+            [country] => UA
+            [sunrise] => 1723776150
+            [sunset] => 1723827680
+        )
+
+    [timezone] => 10800
+    [id] => 698625
+    [name] => Oleksandriya
+    [cod] => 200
+)
+
+[16-Aug-2024 11:53:44 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => 30.5167
+            [lat] => 50.4333
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 804
+                    [main] => Clouds
+                    [description] => overcast clouds
+                    [icon] => 04d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 28.73
+            [feels_like] => 28.6
+            [temp_min] => 28.73
+            [temp_max] => 29.25
+            [pressure] => 1017
+            [humidity] => 43
+            [sea_level] => 1017
+            [grnd_level] => 1001
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 0.45
+            [deg] => 339
+            [gust] => 1.79
+        )
+
+    [clouds] => Array
+        (
+            [all] => 100
+        )
+
+    [dt] => 1723808641
+    [sys] => Array
+        (
+            [type] => 2
+            [id] => 2003742
+            [country] => UA
+            [sunrise] => 1723776506
+            [sunset] => 1723828571
+        )
+
+    [timezone] => 10800
+    [id] => 703448
+    [name] => Kyiv
+    [cod] => 200
+)
+
+[16-Aug-2024 11:53:44 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => 30.5167
+            [lat] => 50.4333
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 804
+                    [main] => Clouds
+                    [description] => overcast clouds
+                    [icon] => 04d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 28.73
+            [feels_like] => 28.6
+            [temp_min] => 28.73
+            [temp_max] => 29.25
+            [pressure] => 1017
+            [humidity] => 43
+            [sea_level] => 1017
+            [grnd_level] => 1001
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 0.45
+            [deg] => 339
+            [gust] => 1.79
+        )
+
+    [clouds] => Array
+        (
+            [all] => 100
+        )
+
+    [dt] => 1723808641
+    [sys] => Array
+        (
+            [type] => 2
+            [id] => 2003742
+            [country] => UA
+            [sunrise] => 1723776506
+            [sunset] => 1723828571
+        )
+
+    [timezone] => 10800
+    [id] => 703448
+    [name] => Kyiv
+    [cod] => 200
+)
+
+[16-Aug-2024 11:53:45 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => 30.5167
+            [lat] => 50.4333
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 804
+                    [main] => Clouds
+                    [description] => overcast clouds
+                    [icon] => 04d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 28.73
+            [feels_like] => 28.6
+            [temp_min] => 28.73
+            [temp_max] => 29.25
+            [pressure] => 1017
+            [humidity] => 43
+            [sea_level] => 1017
+            [grnd_level] => 1001
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 0.45
+            [deg] => 339
+            [gust] => 1.79
+        )
+
+    [clouds] => Array
+        (
+            [all] => 100
+        )
+
+    [dt] => 1723808641
+    [sys] => Array
+        (
+            [type] => 2
+            [id] => 2003742
+            [country] => UA
+            [sunrise] => 1723776506
+            [sunset] => 1723828571
+        )
+
+    [timezone] => 10800
+    [id] => 703448
+    [name] => Kyiv
+    [cod] => 200
+)
+
+[16-Aug-2024 11:53:45 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => 30.5167
+            [lat] => 50.4333
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 804
+                    [main] => Clouds
+                    [description] => overcast clouds
+                    [icon] => 04d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 28.73
+            [feels_like] => 28.6
+            [temp_min] => 28.73
+            [temp_max] => 29.25
+            [pressure] => 1017
+            [humidity] => 43
+            [sea_level] => 1017
+            [grnd_level] => 1001
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 0.45
+            [deg] => 339
+            [gust] => 1.79
+        )
+
+    [clouds] => Array
+        (
+            [all] => 100
+        )
+
+    [dt] => 1723808641
+    [sys] => Array
+        (
+            [type] => 2
+            [id] => 2003742
+            [country] => UA
+            [sunrise] => 1723776506
+            [sunset] => 1723828571
+        )
+
+    [timezone] => 10800
+    [id] => 703448
+    [name] => Kyiv
+    [cod] => 200
+)
+
+[16-Aug-2024 11:53:46 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => 30.5167
+            [lat] => 50.4333
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 804
+                    [main] => Clouds
+                    [description] => overcast clouds
+                    [icon] => 04d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 28.73
+            [feels_like] => 28.6
+            [temp_min] => 28.73
+            [temp_max] => 29.25
+            [pressure] => 1017
+            [humidity] => 43
+            [sea_level] => 1017
+            [grnd_level] => 1001
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 0.45
+            [deg] => 339
+            [gust] => 1.79
+        )
+
+    [clouds] => Array
+        (
+            [all] => 100
+        )
+
+    [dt] => 1723808641
+    [sys] => Array
+        (
+            [type] => 2
+            [id] => 2003742
+            [country] => UA
+            [sunrise] => 1723776506
+            [sunset] => 1723828571
+        )
+
+    [timezone] => 10800
+    [id] => 703448
+    [name] => Kyiv
+    [cod] => 200
+)
+
+[16-Aug-2024 11:53:46 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => 30.5167
+            [lat] => 50.4333
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 804
+                    [main] => Clouds
+                    [description] => overcast clouds
+                    [icon] => 04d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 28.73
+            [feels_like] => 28.6
+            [temp_min] => 28.73
+            [temp_max] => 29.25
+            [pressure] => 1017
+            [humidity] => 43
+            [sea_level] => 1017
+            [grnd_level] => 1001
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 0.45
+            [deg] => 339
+            [gust] => 1.79
+        )
+
+    [clouds] => Array
+        (
+            [all] => 100
+        )
+
+    [dt] => 1723808641
+    [sys] => Array
+        (
+            [type] => 2
+            [id] => 2003742
+            [country] => UA
+            [sunrise] => 1723776506
+            [sunset] => 1723828571
+        )
+
+    [timezone] => 10800
+    [id] => 703448
+    [name] => Kyiv
+    [cod] => 200
+)
+
+[16-Aug-2024 11:53:47 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => 33.1159
+            [lat] => 48.6696
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 802
+                    [main] => Clouds
+                    [description] => scattered clouds
+                    [icon] => 03d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 30.5
+            [feels_like] => 28.69
+            [temp_min] => 30.5
+            [temp_max] => 30.5
+            [pressure] => 1016
+            [humidity] => 21
+            [sea_level] => 1016
+            [grnd_level] => 999
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 4
+            [deg] => 356
+            [gust] => 4.21
+        )
+
+    [clouds] => Array
+        (
+            [all] => 31
+        )
+
+    [dt] => 1723808631
+    [sys] => Array
+        (
+            [country] => UA
+            [sunrise] => 1723776150
+            [sunset] => 1723827680
+        )
+
+    [timezone] => 10800
+    [id] => 698625
+    [name] => Oleksandriya
+    [cod] => 200
+)
+
+[16-Aug-2024 11:53:47 UTC] Ответ от API: Array
+(
+    [coord] => Array
+        (
+            [lon] => 30.5167
+            [lat] => 50.4333
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 804
+                    [main] => Clouds
+                    [description] => overcast clouds
+                    [icon] => 04d
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 28.73
+            [feels_like] => 28.6
+            [temp_min] => 28.73
+            [temp_max] => 29.25
+            [pressure] => 1017
+            [humidity] => 43
+            [sea_level] => 1017
+            [grnd_level] => 1001
+        )
+
+    [visibility] => 10000
+    [wind] => Array
+        (
+            [speed] => 0.45
+            [deg] => 339
+            [gust] => 1.79
+        )
+
+    [clouds] => Array
+        (
+            [all] => 100
+        )
+
+    [dt] => 1723808641
+    [sys] => Array
+        (
+            [type] => 2
+            [id] => 2003742
+            [country] => UA
+            [sunrise] => 1723776506
+            [sunset] => 1723828571
+        )
+
+    [timezone] => 10800
+    [id] => 703448
+    [name] => Kyiv
+    [cod] => 200
+)
+

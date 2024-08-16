@@ -1,16 +1,33 @@
+console.log('init');
+
 jQuery(document).ready(function($) {
-    $('#city-search-btn').on('click', function() {
-        var searchTerm = $('#city-search-input').val();
+    console.log('init');
+
+    // Обрабатываем событие ввода в поле поиска
+    $('#city-search-input').on('input', function() {
+        var searchTerm = $(this).val();
+        console.log('Search Term: ', searchTerm);
+
+        // Выполняем AJAX-запрос при каждом изменении текста
         $.ajax({
-            url: ajaxurl,
+            url: ajax_object.ajax_url,
             type: 'POST',
             data: {
                 action: 'city_search',
-                term: searchTerm
+                term: searchTerm,
+                nonce: ajax_object.nonce
             },
             success: function(response) {
-                $('#cities-table tbody').html(response);
+                console.log('ajax success', response);
+                $('#cities-table tbody').html('<tr><td colspan="3">' + response.data.message + '</td></tr>');
+            
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX Error:', status, error);
             }
         });
     });
 });
+
+
+console.log('init ok');

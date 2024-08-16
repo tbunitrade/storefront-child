@@ -8,10 +8,16 @@ function my_enqueue_scripts() {
     wp_enqueue_script(
         'city-temperature-script',
         get_stylesheet_directory_uri() . '/js/city-temperature.js',
-        array('jquery'),  // Указываем зависимость от jQuery
+        array('jquery'),
         null,
         true
     );
+
+    // Передаем переменные ajax_url и nonce в ваш скрипт
+    wp_localize_script('city-temperature-script', 'ajax_object', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce' => wp_create_nonce('advanced_search_nonce')
+    ));
 }
 add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
 
@@ -71,7 +77,6 @@ add_action('add_meta_boxes', 'add_city_meta_boxes');
 function render_city_coordinates_meta_box($post) {
     $latitude = get_post_meta($post->ID, 'city_latitude', true);
     $longitude = get_post_meta($post->ID, 'city_longitude', true);
-
     ?>
     <label for="city_latitude"><?php _e('Latitude:', 'storefront-child'); ?></label>
     <input type="text" id="city_latitude" name="city_latitude" value="<?php echo esc_attr($latitude); ?>" class="widefat">
@@ -89,7 +94,6 @@ function save_city_coordinates($post_id) {
     }
 }
 add_action('save_post_city', 'save_city_coordinates');
-
 
 // Добавление страницы настроек для API-ключа
 function city_temperature_settings_init() {
@@ -120,3 +124,37 @@ add_action('admin_init', 'city_temperature_settings_init');
 
 // Подключение виджета
 require_once get_stylesheet_directory() . '/inc/class-city-weather-widget.php';
+function handle_ajax_city_search() {
+    check_ajax_referer('advanced_search_nonce', 'nonce');
+
+    $term = isset($_POST['term']) ? sanitize_text_field($_POST['term']) : '';
+
+    if (empty($term)) {
+        wp_send_json_error(array('message' => 'Параметр поиска пуст'));
+    }
+
+    // Поиск городов по названию
+    $args = array(
+        'post_type' => 'city',
+        'posts_per_page' => -1,
+        's' => $term,
+    );
+
+    $query = new WP_Query($args);
+
+    if (!$query->have_posts()) {
+        wp_send_json_error(array('message' => 'Города не найдены'));
+    }
+
+    $cities = array();
+    while ($query->have_posts()) {
+        $query->the_post();
+        $cities[] = get_the_title(); // Можно добавить больше данных, если нужно
+    }
+
+    wp_send_json_success(array('message' => implode(', ', $cities)));
+    wp_die();
+}
+
+add_action('wp_ajax_city_search', 'handle_ajax_city_search');
+add_action('wp_ajax_nopriv_city_search', 'handle_ajax_city_search');

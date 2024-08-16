@@ -1,14 +1,10 @@
 console.log('init');
 
 jQuery(document).ready(function($) {
-    console.log('init');
-
-    // Обрабатываем событие ввода в поле поиска
     $('#city-search-input').on('input', function() {
         var searchTerm = $(this).val();
         console.log('Search Term: ', searchTerm);
 
-        // Выполняем AJAX-запрос при каждом изменении текста
         $.ajax({
             url: ajax_object.ajax_url,
             type: 'POST',
@@ -19,8 +15,19 @@ jQuery(document).ready(function($) {
             },
             success: function(response) {
                 console.log('ajax success', response);
-                $('#cities-table tbody').html('<tr><td colspan="3">' + response.data.message + '</td></tr>');
-            
+                
+                if (response.success) {
+                    var cities = response.data.cities;
+                    var html = '';
+
+                    cities.forEach(function(city) {
+                        html += '<tr><td>' + city.name + '</td><td>' + city.temperature + '°C</td></tr>';
+                    });
+
+                    $('#cities-table tbody').html(html);
+                } else {
+                    $('#cities-table tbody').html('<tr><td colspan="2">' + response.data.message + '</td></tr>');
+                }
             },
             error: function(xhr, status, error) {
                 console.error('AJAX Error:', status, error);
@@ -28,6 +35,9 @@ jQuery(document).ready(function($) {
         });
     });
 });
+
+
+
 
 
 console.log('init ok');

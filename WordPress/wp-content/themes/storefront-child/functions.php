@@ -124,6 +124,7 @@ add_action('admin_init', 'city_temperature_settings_init');
 
 // Подключение виджета
 require_once get_stylesheet_directory() . '/inc/class-city-weather-widget.php';
+
 function handle_ajax_city_search() {
     check_ajax_referer('advanced_search_nonce', 'nonce');
 
@@ -146,13 +147,33 @@ function handle_ajax_city_search() {
         wp_send_json_error(array('message' => 'Города не найдены'));
     }
 
+    $api_key = get_option('city_temperature_api_key');
     $cities = array();
+
     while ($query->have_posts()) {
         $query->the_post();
-        $cities[] = get_the_title(); // Можно добавить больше данных, если нужно
+        $city_name = get_the_title();
+
+        // Запрос к API OpenWeatherMap по названию города
+        $url = "https://api.openweathermap.org/data/2.5/weather?q={$city_name}&appid={$api_key}&units=metric";
+        $response = wp_remote_get($url);
+
+        if (is_wp_error($response)) {
+            $temperature = 'N/A';
+            error_log('Ошибка запроса к API: ' . $response->get_error_message());
+        } else {
+            $data = json_decode(wp_remote_retrieve_body($response), true);
+            error_log('Ответ от API: ' . print_r($data, true)); // Логирование ответа API
+            $temperature = isset($data['main']['temp']) ? $data['main']['temp'] : 'N/A';
+        }
+
+        $cities[] = array(
+            'name' => $city_name,
+            'temperature' => $temperature
+        );
     }
 
-    wp_send_json_success(array('message' => implode(', ', $cities)));
+    wp_send_json_success(array('cities' => $cities));
     wp_die();
 }
 

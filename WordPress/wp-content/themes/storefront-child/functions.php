@@ -1,295 +1,105 @@
 <?php
-
-// Подключение стилей родительской темы
-function storefront_child_enqueue_styles() {
-    wp_enqueue_style('storefront-style', get_template_directory_uri() . '/style.css');
-    wp_enqueue_style('storefront-child-style', get_stylesheet_uri(), ['storefront-style']);
-
-    // Подключаем jQuery
-    wp_enqueue_script('jquery');
+// Регистрация кастомного типа записи "Cities"
+function register_city_post_type() {
+    $labels = array(
+        'name'                  => _x('Cities', 'Post Type General Name', 'storefront-child'),
+        'singular_name'         => _x('City', 'Post Type Singular Name', 'storefront-child'),
+        'menu_name'             => __('Cities', 'storefront-child'),
+        'all_items'             => __('All Cities', 'storefront-child'),
+        'add_new_item'          => __('Add New City', 'storefront-child'),
+        'edit_item'             => __('Edit City', 'storefront-child'),
+    );
+    $args = array(
+        'label'                 => __('City', 'storefront-child'),
+        'description'           => __('A custom post type for cities', 'storefront-child'),
+        'labels'                => $labels,
+        'supports'              => array('title'),
+        'public'                => true,
+        'has_archive'           => true,
+    );
+    register_post_type('city', $args);
 }
-add_action('wp_enqueue_scripts', 'storefront_child_enqueue_styles');
+add_action('init', 'register_city_post_type', 0);
 
-// Создание кастомного типа записи "Cities"
-function create_cities_post_type() {
-    register_post_type('city', [
-        'labels' => [
-            'name' => __('Cities'),
-            'singular_name' => __('City'),
-        ],
-        'public' => true,
-        'has_archive' => true,
-        'supports' => ['title', 'editor', 'custom-fields'],
-        'menu_icon' => 'dashicons-location',
-    ]);
+// Регистрация кастомной таксономии "Countries"
+function register_country_taxonomy() {
+    $labels = array(
+        'name'              => _x('Countries', 'taxonomy general name', 'storefront-child'),
+        'singular_name'     => _x('Country', 'taxonomy singular name', 'storefront-child'),
+        'search_items'      => __('Search Countries', 'storefront-child'),
+        'all_items'         => __('All Countries', 'storefront-child'),
+    );
+    $args = array(
+        'labels'            => $labels,
+        'hierarchical'      => true,
+        'public'            => true,
+    );
+    register_taxonomy('country', array('city'), $args);
 }
-add_action('init', 'create_cities_post_type');
+add_action('init', 'register_country_taxonomy', 0);
 
-// Создание метабокса для широты и долготы
+// Добавление мета-боксов для широты и долготы
 function add_city_meta_boxes() {
-    add_meta_box('city_coordinates', 'City Coordinates', 'render_city_coordinates_meta_box', 'city', 'side', 'default');
+    add_meta_box(
+        'city_coordinates',
+        __('City Coordinates', 'storefront-child'),
+        'render_city_coordinates_meta_box',
+        'city',
+        'side',
+        'default'
+    );
 }
 add_action('add_meta_boxes', 'add_city_meta_boxes');
 
 function render_city_coordinates_meta_box($post) {
-    $latitude = get_post_meta($post->ID, '_city_latitude', true);
-    $longitude = get_post_meta($post->ID, '_city_longitude', true);
+    $latitude = get_post_meta($post->ID, 'city_latitude', true);
+    $longitude = get_post_meta($post->ID, 'city_longitude', true);
+
     ?>
-    <label for="city_latitude">Latitude:</label>
-    <input type="text" id="city_latitude" name="city_latitude" value="<?php echo esc_attr($latitude); ?>" />
-    <br />
-    <label for="city_longitude">Longitude:</label>
-    <input type="text" id="city_longitude" name="city_longitude" value="<?php echo esc_attr($longitude); ?>" />
+    <label for="city_latitude"><?php _e('Latitude:', 'storefront-child'); ?></label>
+    <input type="text" id="city_latitude" name="city_latitude" value="<?php echo esc_attr($latitude); ?>" class="widefat">
+    <label for="city_longitude"><?php _e('Longitude:', 'storefront-child'); ?></label>
+    <input type="text" id="city_longitude" name="city_longitude" value="<?php echo esc_attr($longitude); ?>" class="widefat">
     <?php
 }
 
 function save_city_coordinates($post_id) {
     if (array_key_exists('city_latitude', $_POST)) {
-        update_post_meta($post_id, '_city_latitude', sanitize_text_field($_POST['city_latitude']));
+        update_post_meta($post_id, 'city_latitude', sanitize_text_field($_POST['city_latitude']));
     }
     if (array_key_exists('city_longitude', $_POST)) {
-        update_post_meta($post_id, '_city_longitude', sanitize_text_field($_POST['city_longitude']));
+        update_post_meta($post_id, 'city_longitude', sanitize_text_field($_POST['city_longitude']));
     }
 }
-add_action('save_post', 'save_city_coordinates');
+add_action('save_post_city', 'save_city_coordinates');
 
-// Создание таксономии "Countries"
-function create_countries_taxonomy() {
-    register_taxonomy('country', 'city', [
-        'labels' => [
-            'name' => __('Countries'),
-            'singular_name' => __('Country'),
-        ],
-        'hierarchical' => true,
-        'public' => true,
-    ]);
-}
-add_action('init', 'create_countries_taxonomy');
 
-// Добавляем интервал в 15 минут в Cron
-add_filter('cron_schedules', function($schedules) {
-    $schedules['15_minutes'] = [
-        'interval' => 15 * 60,
-        'display'  => __('Every 15 Minutes'),
-    ];
-    return $schedules;
-});
+// Добавление страницы настроек для API-ключа
+function city_temperature_settings_init() {
+    add_settings_section(
+        'city_temperature_settings_section',
+        __('Настройки API OpenWeatherMap', 'storefront-child'),
+        null,
+        'general'
+    );
 
-// Обновление температуры городов по расписанию
-class City_Updater {
+    add_settings_field(
+        'city_temperature_api_key',
+        __('API Key OpenWeatherMap', 'storefront-child'),
+        'city_temperature_api_key_field',
+        'general',
+        'city_temperature_settings_section'
+    );
 
-    public function init() {
-        // Запуск функции обновления по расписанию
-        add_action('wp', [$this, 'schedule_temperature_updates']);
-        add_action('update_city_temperatures', [$this, 'update_city_temperatures']);
-        // Регистрация настройки для API ключа
-        add_action('admin_init', [$this, 'register_api_key_setting']);
-    }
-
-    public function schedule_temperature_updates() {
-        if (!wp_next_scheduled('update_city_temperatures')) {
-            wp_schedule_event(time(), '15_minutes', 'update_city_temperatures');
-        }
-    }
-
-    public function update_city_temperatures() {
-        $api_key = get_option('openweathermap_api_key');
-        if (!$api_key) {
-            error_log('API ключ не установлен.');
-            return;
-        }
-
-        $cities = get_posts([
-            'post_type' => 'city',
-            'posts_per_page' => -1,
-        ]);
-
-        foreach ($cities as $city) {
-            $city_name = get_the_title($city->ID);
-            $latitude = get_post_meta($city->ID, '_city_latitude', true);
-            $longitude = get_post_meta($city->ID, '_city_longitude', true);
-
-            error_log('Начинаем обновление данных для города: ' . $city_name);
-
-            $response = wp_remote_get("http://api.openweathermap.org/data/2.5/weather?lat={$latitude}&lon={$longitude}&appid={$api_key}&units=metric");
-
-            if (is_wp_error($response)) {
-                error_log('Ошибка в запросе к OpenWeatherMap: ' . $response->get_error_message());
-                continue;
-            }
-
-            $data = json_decode(wp_remote_retrieve_body($response), true);
-            if ($data['cod'] !== 200) {
-                error_log('Ошибка в ответе от OpenWeatherMap: ' . $data['message']);
-                continue;
-            }
-
-            // Логируем успешное получение данных
-            error_log('Данные успешно получены для города: ' . $city_name);
-
-            // Сохранение данных в кастомные поля
-            update_post_meta($city->ID, '_city_temperature', $data['main']['temp']);
-            update_post_meta($city->ID, '_city_weather_description', $data['weather'][0]['description']);
-            update_post_meta($city->ID, '_city_humidity', $data['main']['humidity']);
-            update_post_meta($city->ID, '_city_wind_speed', $data['wind']['speed']);
-            update_post_meta($city->ID, '_city_cloudiness', $data['clouds']['all']);
-            update_post_meta($city->ID, '_city_pressure', $data['main']['pressure']);
-            update_post_meta($city->ID, '_city_visibility', $data['visibility']);
-            update_post_meta($city->ID, '_city_sunrise', $data['sys']['sunrise']);
-            update_post_meta($city->ID, '_city_sunset', $data['sys']['sunset']);
-        }
-    }
-
-    public function register_api_key_setting() {
-        register_setting('general', 'openweathermap_api_key', [
-            'type' => 'string',
-            'description' => __('API ключ для OpenWeatherMap'),
-            'sanitize_callback' => 'sanitize_text_field',
-            'show_in_rest' => false,
-        ]);
-
-        add_settings_field(
-            'openweathermap_api_key',
-            __('OpenWeatherMap API ключ'),
-            [$this, 'api_key_field_html'],
-            'general'
-        );
-    }
-
-    public function api_key_field_html() {
-        $api_key = get_option('openweathermap_api_key', '');
-        echo '<input type="text" name="openweathermap_api_key" value="' . esc_attr($api_key) . '" />';
-    }
+    register_setting('general', 'city_temperature_api_key', 'esc_attr');
 }
 
-$city_updater = new City_Updater();
-$city_updater->init();
-
-// Регистрация виджета для отображения температуры города
-class City_Temperature_Widget extends WP_Widget {
-    function __construct() {
-        parent::__construct('city_temperature_widget', __('City Temperature'));
-    }
-
-    public function widget($args, $instance) {
-        $city_id = !empty($instance['city_id']) ? $instance['city_id'] : '';
-        if ($city_id) {
-            $city_name = get_the_title($city_id);
-            $latitude = get_post_meta($city_id, '_city_latitude', true);
-            $longitude = get_post_meta($city_id, '_city_longitude', true);
-
-            $api_key = get_option('openweathermap_api_key');
-            $response = wp_remote_get("http://api.openweathermap.org/data/2.5/weather?lat={$latitude}&lon={$longitude}&appid={$api_key}&units=metric");
-
-            if (!is_wp_error($response)) {
-                $data = json_decode(wp_remote_retrieve_body($response), true);
-                if (isset($data['main']['temp'])) {
-                    $temperature = $data['main']['temp'];
-                    echo $args['before_widget'];
-                    echo $args['before_title'] . $city_name . $args['after_title'];
-                    echo '<p>Current Temperature: ' . esc_html($temperature) . '°C</p>';
-                    echo $args['after_widget'];
-                }
-            }
-        }
-    }
-
-    public function form($instance) {
-        $cities = get_posts(['post_type' => 'city', 'numberposts' => -1]);
-        $city_id = !empty($instance['city_id']) ? $instance['city_id'] : '';
-        ?>
-        <p>
-            <label for="<?php echo esc_attr($this->get_field_id('city_id')); ?>"><?php _e('Select City:'); ?></label>
-            <select class="widefat" id="<?php echo esc_attr($this->get_field_id('city_id')); ?>" name="<?php echo esc_attr($this->get_field_name('city_id')); ?>">
-                <?php foreach ($cities as $city): ?>
-                    <option value="<?php echo esc_attr($city->ID); ?>" <?php selected($city_id, $city->ID); ?>><?php echo esc_html($city->post_title); ?></option>
-                <?php endforeach; ?>
-            </select>
-        </p>
-        <?php
-    }
-
-    public function update($new_instance, $old_instance) {
-        $instance = [];
-        $instance['city_id'] = (!empty($new_instance['city_id'])) ? strip_tags($new_instance['city_id']) : '';
-        return $instance;
-    }
-}
-add_action('widgets_init', function() {
-    register_widget('City_Temperature_Widget');
-});
-
-// Шорткод для вывода списка городов и их температур
-class Cities_List_Shortcode {
-    public function __construct() {
-        add_shortcode('cities_list', [$this, 'render_cities_list']);
-    }
-
-    public function render_cities_list() {
-        ob_start();
-    
-        echo '<div class="cities-list">';
-        echo '<input type="text" id="city-search" placeholder="Search Cities">';
-        echo '<table id="cities-table">';
-        echo '<thead>';
-        echo '<tr>';
-        echo '<th>Country</th>';
-        echo '<th>City</th>';
-        echo '<th>Temperature (°C)</th>';
-        echo '</tr>';
-        echo '</thead>';
-        echo '<tbody>';
-    
-        $cities = $this->get_cities();
-    
-        foreach ($cities as $city) {
-            echo '<tr>';
-            echo '<td>' . esc_html($city['country']) . '</td>';
-            echo '<td>' . esc_html($city['city']) . '</td>';
-            echo '<td>' . esc_html($city['temperature']) . '</td>';
-            echo '</tr>';
-        }
-    
-        echo '</tbody>';
-        echo '</table>';
-        echo '</div>';
-    
-        return ob_get_clean();
-    }
-    
-    private function get_cities() {
-        $cities = [];
-    
-        $args = [
-            'post_type' => 'city',
-            'post_status' => 'publish',
-            'numberposts' => -1,
-        ];
-    
-        $posts = get_posts($args);
-    
-        foreach ($posts as $post) {
-            $country = wp_get_post_terms($post->ID, 'country', ['fields' => 'names']);
-            $temperature = get_post_meta($post->ID, '_city_temperature', true);
-    
-            // Проверка и вывод в лог сохраненных данных
-            error_log('Город: ' . $post->post_title . ' | Температура: ' . $temperature);
-    
-            $cities[] = [
-                'city' => $post->post_title,
-                'country' => $country ? $country[0] : 'N/A',
-                'temperature' => $temperature ? $temperature : 'N/A',
-            ];
-        }
-    
-        return $cities;
-    }
+function city_temperature_api_key_field() {
+    $value = get_option('city_temperature_api_key', '');
+    echo '<input type="text" id="city_temperature_api_key" name="city_temperature_api_key" value="' . esc_attr($value) . '" class="regular-text">';
 }
 
-new Cities_List_Shortcode();
+add_action('admin_init', 'city_temperature_settings_init');
 
-// Удалите или закомментируйте этот блок после тестирования
-add_action('init', function() {
-    global $city_updater;
-    $city_updater->update_city_temperatures();
-});
+// Подключение виджета
+require_once get_stylesheet_directory() . '/inc/class-city-weather-widget.php';
